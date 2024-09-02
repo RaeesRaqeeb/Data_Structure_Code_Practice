@@ -57,7 +57,7 @@ class ArrayList
         void Display_The_Array()
         {
             Ptr_to_Start();
-            for(int i=0;i<length;i++)
+            for(int i=0;i<length-1;i++)
             {
                 cout<<*(Curr_ptr+i);
             }
@@ -110,14 +110,16 @@ class ArrayList
             while(1)
             {
                 Ptr_to_Start();
-                Curr_ptr+=Position_of_value-1;
-                for(int i=length; i<capacity;i++)
+                Curr_ptr=Array_ptr+Position_of_value-1;
+                Position_of_value=Find_position(value);
+                for(int i=Position_of_value; i<capacity-1;i++)
                 {
                     *(Curr_ptr)=*(Curr_ptr+1);
+                    ++Curr_ptr;
                 }
-                if(Position_of_value=(Find_position(value))!=0)
+                
                      --length;
-                else 
+            if(Position_of_value=(Find_position(value))==0)
                 break;
 
             }
