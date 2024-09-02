@@ -45,21 +45,22 @@ class ArrayList
 
             Ptr_to_End();
 
-            for (int i=length;i>position;--i)
+            for (int i=length;i>=position;--i)
             {
                 *(Curr_ptr+1)=*(Curr_ptr);
                 --Curr_ptr;
             }
-            *(Curr_ptr)=value;
+            *(Curr_ptr+1)=value;
             ++length;
         }
 
         void Display_The_Array()
         {
             Ptr_to_Start();
-            for(int i=0;i<length-1;i++)
+            for(int i=1;i<length-1;i++)
             {
-                cout<<*(Curr_ptr+i);
+                cout<<*(Curr_ptr);
+                ++Curr_ptr;
             }
         }
 
@@ -105,39 +106,89 @@ class ArrayList
             }
             
 
-            int Position_of_value=Find_position(value);
+            int Position_of_value;
 
-            while(1)
-            {
+                while(Position_of_value=(Find_position(value))!=0)
+                {
                 Ptr_to_Start();
+                
+                Position_of_value=(Find_position(value));
+                cout<<"Position:"<<Position_of_value<<endl;
                 Curr_ptr=Array_ptr+Position_of_value-1;
-                Position_of_value=Find_position(value);
-                for(int i=Position_of_value; i<capacity-1;i++)
+                cout<<"Value:"<<*Curr_ptr<<endl;
+                
+                for(int i=Position_of_value; i<length-1;i++)
                 {
                     *(Curr_ptr)=*(Curr_ptr+1);
                     ++Curr_ptr;
                 }
+
                 
-                     --length;
-            if(Position_of_value=(Find_position(value))==0)
-                break;
+           
+                     length--;
+         
 
-            }
-
+            
+                }
+   
             
         }
 
+        int Getting_value_by_position(int position)
+        {
+            if(length==0)
+            {
+                cout<<"\nThe list is empty!!!"<<endl;
+                return 0;
+            }
+            if(position<1 || position>length-1)
+            {
+                cout<<"\nInvalid position entered!!!!!!";
+                return 0;
+            }
 
+            Curr_ptr=Array_ptr+position-1;
+
+            return *(Curr_ptr);
+        }
+
+        void update(int value, int position)
+        {
+           if(position<1 || position >length-1)
+           {
+            return;
+           }
+           
+           Ptr_to_Start();
+           Curr_ptr=Array_ptr+position-1;
+           *(Curr_ptr)=value;
+        }
+
+        void Copy_function(ArrayList &obj)
+        {
+        
+            obj.Ptr_to_Start();
+            Ptr_to_Start();
+            for( int i=0;i<obj.length;i++)
+            {
+                *(Curr_ptr+i)=*(obj.Curr_ptr+i);
+                length++;
+            }
+
+
+        }
 };
  int main(void)
  {
 
     ArrayList Obj1(5);
     Obj1.Random_array_input();
+    int position;
+
     while(1)
 {
     cout<<"\nWhat you want to with the list?"<<endl;
-    cout<<"1)Insert the new value\n2)Find position of value\n3)Remove the value\n";
+    cout<<"1)Insert the new value\n2)Find position of value\n3)Remove the value\n4)Enter the Position to see the value\n5)Copying Array 1 value to another array\n0)Exit";
     cout<<"\nUser input:";
     int user_input;
     cin>>user_input;
@@ -145,7 +196,6 @@ class ArrayList
     {
     cout<<"Enter value to insert:";
     cin>>user_input;
-    int position;
     cout<<"Position:";
     cin>>position;
     Obj1.insert(user_input, position);
@@ -172,6 +222,31 @@ class ArrayList
         cin>>user_input;
         Obj1.Remove_by_value(user_input);
         Obj1.Display_The_Array();
+    }
+    else if(user_input==4)
+    {
+        
+        cout<<"\nEnter the position to find the value at that position:";
+        cin>>user_input;
+        cout<<Obj1.Getting_value_by_position(user_input)<<" is the value at position :"<<user_input<<endl;
+
+    }
+    else if(user_input==5)
+    {
+        cout<<"\nEnter the value and position to change the current value at the position:";
+        cout<<"Value:";
+        cin>>user_input;
+        cout<<"Position:";
+        cin>>position;
+        Obj1.update(user_input, position);
+        Obj1.Display_The_Array();
+    }
+    else if(user_input==6)
+    {
+        ArrayList Obj2(5);
+        Obj2.Copy_function(Obj1);
+        cout<<"\nFUNCTION COPIED SUCCESSFULLY\n";
+        Obj2.Display_The_Array();
     }
     else if(user_input==0)
     {
