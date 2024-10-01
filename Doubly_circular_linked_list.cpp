@@ -5,15 +5,15 @@ using namespace std;
 class Nodes
 {
     public:
-            Nodes *Next;
-            Nodes *Prev;
+            Nodes *next;
+            Nodes *prev;
             int info;
 
     Nodes(int value)
     {
         info= value;
-        Next=NULL;
-        Prev=NULL;
+        next=NULL;
+        prev=NULL;
     }
             
 };
@@ -32,6 +32,7 @@ class Double_Circular_Linked_list
         head=NULL;
 
     }
+   
       void insertion(int value, int position)
     {
         //Position check
@@ -42,23 +43,30 @@ class Double_Circular_Linked_list
         }
 
         Nodes *new_node= new Nodes(value);
-        if(position==1)
+       if(position==1)
         {
             if(head!=NULL)
                 {
                 Nodes *Curr_ptr=head;
-                new_node->Next=Curr_ptr;
-                Curr_ptr->Prev=new_node;
+                new_node->next=Curr_ptr;
+                Curr_ptr->prev=new_node;
                 head=new_node;
+                for(int i=1;i<length;i++)
+                {
+                  Curr_ptr=Curr_ptr->next;
                 
+                
+                  }
+                  Curr_ptr->next=head;
                 }
             else
             {
                 head=new_node;
-                new_node->Next=new_node;
-                new_node->Prev=new_node;
+                new_node->next=new_node;
+                new_node->prev=new_node;
             }
         }
+       
         else if(position!=length+1)
         {
             Nodes *Curr_ptr=head;
@@ -66,27 +74,27 @@ class Double_Circular_Linked_list
             for (int i=1;i<position;i++)
             {
                 slow2=Curr_ptr;
-                Curr_ptr=Curr_ptr->Next;
+                Curr_ptr=Curr_ptr->next;
             }
-            new_node->Next=Curr_ptr;
-            slow2->Next=new_node;
-            Curr_ptr->Prev=new_node;
-            new_node->Prev=slow2;   
+            new_node->next=Curr_ptr;
+            slow2->next=new_node;
+            Curr_ptr->prev=new_node;
+            new_node->prev=slow2;   
         }
-        else
+        else//For insertion at the end of the circular doubly linkedlist
         {   Nodes*Curr_ptr=head;
             Nodes *slow2=head;
             
-            for (int i=1;i<position;i++)
+            for (int i=1;i<position-1;i++)
             {
             
-                Curr_ptr=Curr_ptr->Next;
+                Curr_ptr=Curr_ptr->next;
             }
             
-                Curr_ptr->Next=new_node;
-                new_node->Prev=Curr_ptr;
-                new_node->Next=slow2;
-                slow2->Prev=new_node;
+                Curr_ptr->next=new_node;
+                new_node->prev=Curr_ptr;
+                new_node->next=slow2;
+                slow2->prev=new_node;
                 }
 
     
@@ -94,7 +102,7 @@ class Double_Circular_Linked_list
 
         length+=1;
     }
-
+      
     void remove(int position)
     {
         //Position Checker
@@ -107,14 +115,14 @@ class Double_Circular_Linked_list
         if(position==1)
         {
             Nodes *Curr_ptr=head;
-            head= Curr_ptr->Next;
+            head= Curr_ptr->next;
             Nodes *end_ptr=head;
             for (int i=1;i<length;i++)
             {
-                end_ptr=end_ptr->Next;
+                end_ptr=end_ptr->next;
             }
-            head->Prev=end_ptr;
-            end_ptr->Next=head;
+            head->prev=end_ptr;
+            end_ptr->next=head;
 
             delete Curr_ptr;
         }
@@ -125,11 +133,11 @@ class Double_Circular_Linked_list
             
             for(int i=1;i<length-1; i++)
             {
-                End= End->Next;
+                End= End->next;
             }
             
-            End->Next=Curr_ptr;
-            Curr_ptr->Prev=End;
+            End->next=Curr_ptr;
+            Curr_ptr->prev=End;
         }
         else
         {
@@ -139,13 +147,13 @@ class Double_Circular_Linked_list
             for( int i=1;i<position;i++)
             {
                 slow_ptr=Curr_ptr;
-                Curr_ptr=Curr_ptr->Next;
+                Curr_ptr=Curr_ptr->next;
             }
            
-            if(Curr_ptr->Next!=NULL)
-                {slow_ptr->Next=Curr_ptr->Next;
-                Curr_ptr=Curr_ptr->Next;
-                Curr_ptr->Prev=slow_ptr;}
+            if(Curr_ptr->next!=NULL)
+                {slow_ptr->next=Curr_ptr->next;
+                Curr_ptr=Curr_ptr->next;
+                Curr_ptr->prev=slow_ptr;}
             else
             {
                 delete Curr_ptr;
@@ -166,8 +174,8 @@ class Double_Circular_Linked_list
         {   
             // cout<<i<<endl;
             cout<<Curr_ptr->info<<endl;
-            // if(Curr_ptr->Next!=NULL)
-                Curr_ptr= Curr_ptr->Next;
+            // if(Curr_ptr->next!=NULL)
+                Curr_ptr= Curr_ptr->next;
         }
         
 
