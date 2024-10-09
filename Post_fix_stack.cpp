@@ -33,6 +33,8 @@ class Linked_List
 
     void push(int value)
     {
+        
+
         Nodes *n= new Nodes(value);
         Nodes *curr=top;
         if(top==NULL)
