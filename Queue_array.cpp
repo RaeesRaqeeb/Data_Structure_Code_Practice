@@ -25,15 +25,14 @@ class Queue
 
     void enqueue(int value)
     {
-        if(is_full())
+        if(length==capacity)
         {
             cout<<"the queue is full no more enqueue is possible\n";
             return;
         }
-        if(rear -1 == 0)
-        {
-            rear=capacity;
-        }
+
+        if (rear==0)
+                rear=capacity-1;
         else rear--;
 
         array[rear]=value;
@@ -57,7 +56,10 @@ class Queue
             cout<<"\nThe queue is empty\n";
             return -1;
         }
-        int value=array[front-1];
+        int value;
+        if(front -1 > 0)
+            value=array[front-1];
+        
         if(front==0)
         {
             front=capacity;
@@ -70,15 +72,17 @@ class Queue
 
     int front_value()
     {
-        return array[front];
+        return array[front-1];
     }
 
 
     void display()
     {
-        for(int i=0;i<length;i++)
+        int index=front-1;
+        for(int i=capacity-1;i>=(capacity-length);i--)
         {
-            cout<<array[i];
+            cout<<array[index];
+            index-=1;
         }
     }
 
@@ -94,15 +98,24 @@ int main(void)
     Q_array1.enqueue(4);
     Q_array1.enqueue(5);
 
+
 cout<<"\nbefore calling the dequeue function\n";
 
     Q_array1.display();
     Q_array1.dequeue();
-    Q_array1.enqueue(5);
+    // Q_array1.enqueue(5);
 
 
 cout<<"\nAfter calling the dequeue function\n";
     Q_array1.display();
+
+    cout<<"\nAgain\n"<<endl;
+    Q_array1.enqueue(6);
+    Q_array1.enqueue(7);
+    Q_array1.enqueue(8);
+
+    Q_array1.display();
+
 
     cout<<"\n"<<Q_array1.front_value()<<endl;
 

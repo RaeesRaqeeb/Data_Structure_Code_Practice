@@ -122,6 +122,49 @@ class Circular_singly_Linked_list
         }
         
     }
+
+    void change()
+    {
+        Nodes *curr=head;
+        for(int i=0;i<length-4;i++) 
+        {
+            curr=curr->Next;
+        }
+        Nodes *curr2=head;
+
+         while(curr2->Next != head)
+        {
+            curr2=curr2->Next;
+        }
+        curr2->Next=curr;
+    }
+
+
+    int cycle_count()
+    {
+        int length_counter=0,jump=0;
+        Nodes *first=head;
+        Nodes *motion=head;
+        cout<<length<<endl;
+        for(int i=1;i<length;i++)
+        {
+            for(int j=1;j<length;j++)
+            {
+                jump+=1;
+
+                if(motion->Next==first)
+                {
+                    length_counter=jump;
+                }
+                motion=motion->Next;
+
+            }
+            jump=0;
+            first=first->Next;
+            motion=first->Next;
+        }
+        return length_counter;
+    }
 };
 
 
@@ -133,13 +176,15 @@ int main(void)
     CSL1.insertion(3,1);
     CSL1.insertion(2,1);
     CSL1.insertion(1,1);
-    CSL1.display_linked_list();
+    // CSL1.display_linked_list();
 
-    if(CSL1.Palindrome())
-    {
-        cout<<"The circular linked list is palindrome";
-    }
-    else{
-        cout<<"The given circular linked list is not palindrome";
-    }
+    // if(CSL1.Palindrome())
+    // {
+    //     cout<<"The circular linked list is palindrome";
+    // }
+    // else{
+    //     cout<<"The given circular linked list is not palindrome";
+    // }
+    CSL1.change();
+   cout<<CSL1.cycle_count()<<endl;
 }
