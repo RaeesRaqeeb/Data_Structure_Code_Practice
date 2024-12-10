@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 class Nodes
 {
     public:
@@ -181,50 +182,5 @@ class Double_Circular_Linked_list
 
     }
 
-    
 
 };
-
-
-int main(void)
-{
-
-    Double_Circular_Linked_list DCL1;
-    DCL1.insertion(10,1);
-    DCL1.insertion(20,1);
-    DCL1.insertion(30,1);
-
-    DCL1.insertion(90,2);
-    DCL1.insertion(80,7);
-    DCL1.Doubly_display();
-
-    DCL1.remove(1);
-
-    cout<<endl;
-    DCL1.Doubly_display();
-
-    cout<<endl;
-
-    DCL1.remove(4);
-
-    DCL1.Doubly_display();
-
-    DCL1.insertion(10,1);
-    DCL1.insertion(20,1);
-    DCL1.insertion(30,1);
-
-    cout<<endl;
-
-    DCL1.Doubly_display();
-
-    cout<<endl;
-    DCL1.remove(3);
-
-    DCL1.Doubly_display();
-
-
-
-
-
-
-}

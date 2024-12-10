@@ -165,22 +165,22 @@ void reverse_evens(Queue *obj)
     }
     int value1=s.size();
   
-for(int i=1;i<=size2;i++)
-{
-    int value;
-    if(i%2 == 0)
+    for(int i=1;i<=size2;i++)
     {
-        obj->dequeue();
-        value=s.top();
-        obj->enqueue(value);
-        s.pop();
+        int value;
+        if(i%2 == 0)
+        {
+            obj->dequeue();
+            value=s.top();
+            obj->enqueue(value);
+            s.pop();
+        }
+        else
+        {
+            value=obj->dequeue();
+            obj->enqueue(value);
+        }
     }
-    else
-    {
-        value=obj->dequeue();
-        obj->enqueue(value);
-    }
-}
   
 
 }
