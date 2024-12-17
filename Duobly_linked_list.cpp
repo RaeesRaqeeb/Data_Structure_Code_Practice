@@ -22,7 +22,7 @@ class Nodes
 
 class Double_Linked_list
 {
-    private:
+    public:
             int length;
             Nodes *head;
 
@@ -133,6 +133,41 @@ class Double_Linked_list
 
     }
     
+      int counting_node(Nodes *passed,int count)
+    {
+        if(passed==NULL)
+        {
+            return 0;
+        }
+        if(head==NULL)
+            return 0;
+        cout<<"herer"<<endl;
+        if(passed->Next==NULL)
+            return count;
+
+        return counting_node(passed->Next,count+1);
+    }
+      void reversing()
+    {
+        Nodes *curr1=head;
+        Nodes *curr2=head;
+
+        curr2=curr2->Next;
+        curr1->Next=NULL;
+        while(curr2->Prev!=NULL)
+        {
+            curr2=curr2->Next;
+            curr2->Prev->Next=curr1;
+            curr1->Prev=curr2->Prev;
+            curr1=curr2->Prev;
+            if(curr2->Next == NULL)
+                {
+                    curr2->Next=curr1;
+                    curr2->Prev=NULL;
+                }
+        }
+
+    }
 
 };
 
@@ -141,23 +176,21 @@ int main(void)
 {
 
     Double_Linked_list DL1;
-    DL1.insertion(4,1);
-    DL1.insertion(2,1);
-    DL1.insertion(3,1);
 
-    DL1.Doubly_display();
-    cout<<"\n";
-    DL1.insertion(5,2);
-    DL1.Doubly_display();
+
+    // DL1.Doubly_display();
+    // cout<<"\n";
+    // DL1.insertion(5,2);
+    // DL1.Doubly_display();
 
     cout<<endl;
 
-    DL1.remove(1);
-    DL1.Doubly_display();
+    // DL1.remove(1);
+    // DL1.Doubly_display();
 
     cout<<endl;
-    DL1.remove(3);
-    DL1.Doubly_display();
+    // DL1.remove(3);
+    // DL1.Doubly_display();
     DL1.insertion(4,1);
     DL1.insertion(2,1);
     DL1.insertion(3,1);
@@ -167,10 +200,12 @@ int main(void)
 
     // DL1.insertion(7,2);
     cout<<endl;
-    DL1.Doubly_display();
+    // DL1.Doubly_display();
 
     cout<<endl;
-    DL1.remove(2);
+    // DL1.remove(2);
 
     DL1.Doubly_display();
+     cout<<"Number of nodes in the double linkedlist is:"<<DL1.counting_node(DL1.head,0)+1;
+
 }

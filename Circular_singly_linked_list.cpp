@@ -165,6 +165,25 @@ class Circular_singly_Linked_list
         }
         return length_counter;
     }
+
+    int printing(Nodes *passed_root, int count)
+    {
+        if(passed_root==NULL)
+        {
+            return -1;
+        }
+
+        if(count==length)
+            return passed_root->info;
+
+        
+        int value= printing(passed_root->next;count+1);
+        cout<<value<<" ";
+
+        return passed_root->info;
+    
+
+    }
 };
 
 
@@ -187,4 +206,9 @@ int main(void)
     // }
     CSL1.change();
    cout<<CSL1.cycle_count()<<endl;
+
+
+   cout<<"All nodes:"<<endl;
+   CSL1.printing(CSL1.head,0);
+   
 }

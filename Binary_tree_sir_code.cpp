@@ -544,6 +544,43 @@ void levelOrderTraversal(node* root)
         level++;
     }
 }
+
+
+int maximum_value(Node *passed_root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    if(passed_root==NULL)
+    {
+        return 0;
+    }
+
+    if(passed_root->left==NULL && passed_root->right==NULL)
+    {
+        return passed_root->info;
+    }
+
+    int left=maximum_value(passed_root->left);
+    int right=maximum_value(passed_root->right);
+
+    if(left>right && left > passed_root->info)
+    {
+        return left;
+    }
+    else if( right > left && right > passed_root->info)
+    {
+        return right;
+    }
+    else
+    {
+        return passed_root->info;
+    }
+
+
+}
 int main() 
 {
 // {
@@ -732,6 +769,8 @@ cout<<":"<<child_2_or_not(root4);
 
 
 cout<<levelOrderTraversal(root5)<<endl;
+
+cout<<"Maximum value in the binary tree is:"<<root5.maximum_value(root5);
     return 0;
 }
 

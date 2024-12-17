@@ -35,6 +35,27 @@ public:
     void options();
     void b_search_tree(node *);
     void in_order(node *);
+
+
+    int strickly_binary_tree(node *passed_root)
+    {
+        if(root==NULL)
+            return 0;
+
+        if(passed_root==NULL)
+            return 0;
+
+        if(passed_root->left==NULL && passed_root->right==NULL)
+            return 1;
+
+        int left=strickly_binary_tree(passed_root->left);
+        int right=strickly_binary_tree(passed_root->right);
+
+        if(left+right ==2 || left+right==0)
+            return 1;
+        else 
+            return 0;
+    }
 };
 
 int main()

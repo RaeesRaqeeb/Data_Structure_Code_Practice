@@ -287,6 +287,51 @@ class Linked_list
         
    }
 
+   bool is_ascending()
+   {
+        if(head==NULL)
+            return false;
+
+        Nodes *curr=head;
+        if(curr->info <curr->Next->info)
+            return true;
+        else
+            return false;
+   }
+
+    void insertion_sort(int value)
+    {
+        if(head==NULL)
+        {
+            return;
+        }
+        if(is_ascending())
+        {
+            Nodes *new_node=new Nodes(value);
+            Nodes *curr=head;
+            Nodes *prev=curr;
+            while(curr->info<value)
+            {
+                prev=curr;
+                curr=cur->Next;
+            }
+            new_node->Next=curr;
+            prev->Next=new_node;
+        }
+        else 
+        {
+            Nodes *new_node=new Nodes(value);
+            Nodes *curr=head;
+            Nodes *prev=curr;
+            while(curr->info>value)
+            {
+                prev=curr;
+                curr=cur->Next;
+            }
+            new_node->Next=curr;
+            prev->Next=new_node;
+        }
+    }
 };
 
 int main(void)
@@ -342,11 +387,15 @@ int main(void)
     
     // L1.reversing();
 
-    L1.display_linked_list();
+    // L1.display_linked_list();
 
-    L1.KReverse(4);
+    // L1.KReverse(4);
     cout<<"\n**************\n";
     L1.display_linked_list();
+
+    L1.insertion_sort(55);
+
+    return 0;
 
 
  }
